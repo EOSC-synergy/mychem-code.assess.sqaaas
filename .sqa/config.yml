@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/mychem/mychem-code:
+      branch: master
+      repo: https://github.com/mychem/mychem-code
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/mychem/mychem-code git:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-lemon-bongo.sh
+        container: qc.acc_thirsty-asparagus-sheep
+  QC.Doc:
+    repos:
+      github.com/mychem/mychem-code find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-flax-macaw.sh
+        container: qc.doc_squeaky-ochre-insect
+      github.com/mychem/mychem-code git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-black-turtle.sh
+        container: qc.doc_gummy-celadon-indri
+      github.com/mychem/mychem-code restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-cerulean-goat.sh
+        container: qc.doc_seedy-denim-tetra
+  QC.Lic:
+    repos:
+      github.com/mychem/mychem-code licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-zucchini-bat.sh
+        container: qc.lic_wheezy-crimson-squid
+  QC.Met:
+    repos:
+      github.com/mychem/mychem-code validate_codemeta:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-cerise-maltese.sh
+        container: qc.met_skinny-magnolia-horse
+  QC.Sty:
+    repos:
+      github.com/mychem/mychem-code jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-violet-tetra.sh
+        container: qc.sty_geeky-razzmatazz-bordeaux
+      github.com/mychem/mychem-code oclint:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-olive-indri.sh
+        container: qc.sty_flaky-cerulean-seahorse
+  QC.Ver:
+    repos:
+      github.com/mychem/mychem-code get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-saffron-tiger.sh
+        container: qc.ver_queasy-russet-hornet
+timeout: 5400
